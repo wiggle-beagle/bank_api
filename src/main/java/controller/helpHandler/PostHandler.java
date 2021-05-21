@@ -1,4 +1,4 @@
-package helpHandler;
+package controller.helpHandler;
 
 import com.sun.net.httpserver.HttpExchange;
 

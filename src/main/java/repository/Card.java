@@ -1,6 +1,5 @@
 package repository;
 
-
 public class Card {
     long idCard;
     double balance;
@@ -17,7 +16,8 @@ public class Card {
         this.idAccount = idAccount;
     }
 
-    public Card() {}
+    public Card() {
+    }
 
     public long getIdCard() {
         return idCard;

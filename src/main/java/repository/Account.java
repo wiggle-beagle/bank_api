@@ -13,7 +13,8 @@ public class Account {
         this.idClient = idClient;
     }
 
-    public Account() {}
+    public Account() {
+    }
 
     public long getIdAccount() {
         return idAccount;

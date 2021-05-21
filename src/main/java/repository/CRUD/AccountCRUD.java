@@ -1,8 +1,5 @@
 package repository.CRUD;
 
-import repository.Account;
-import repository.Client;
-
 import java.sql.*;
 
 public class AccountCRUD {
@@ -10,11 +7,6 @@ public class AccountCRUD {
             "  (idClient) VALUES " +
             " ( ?)";
 
-
-//    public static void main(String[] args) throws SQLException {
-//        AccountCRUD accountCRUD = new AccountCRUD();
-//        System.out.println(accountCRUD.createAccount(2));
-//    }
     public Long createAccount(int idClient) throws SQLException {
         long idAccount = 0;
         try (Connection connection = H2JDBCUtils.getConnection()) {

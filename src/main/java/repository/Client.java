@@ -15,7 +15,8 @@ public class Client {
         this.idClient = idClient;
     }
 
-    public Client(){}
+    public Client() {
+    }
 
     public Client(String fio) {
         this.fio = fio;

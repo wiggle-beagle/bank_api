@@ -1,8 +1,6 @@
 package repository.CRUD;
 
 import repository.Client;
-
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,21 +19,5 @@ public class ClientCRUD {
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
         }
-    }
-
-    public static void main(String[] args) throws SQLException, FileNotFoundException {
-//        ClientCRUD clientCRUD = new ClientCRUD();
-//        Client client = new Client(1, "Никонов Николай Петрович");
-//        clientCRUD.insertClient(client);
-
-
-//        CardCRUD cardCRUD = new CardCRUD();
-//        Account account = new Account(100002, 1);
-//        cardCRUD.insertCard(account);
-//        cardCRUD.getListOfCardsByIdClient(client);
-//        CardCRUD cardCRUD = new CardCRUD();
-//        cardCRUD.depositCurrency(250,4276373200000002L);
-//        Card card = new Card(500, 100001);
-//        cardCRUD.checkAccountBalance(100002);
     }
 }
