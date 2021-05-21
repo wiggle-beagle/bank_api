@@ -1,0 +1,50 @@
+
+###
+POST /cardAndAccount
+HOST: localhost:8000
+Accept: application/json
+
+                                  {
+  "idClient": 2
+}
+
+###
+
+GET http://localhost:8000/cardAndAccount?idClient=2
+Accept: application/json
+
+
+###
+POST /balance
+HOST: localhost:8000
+Accept: application/json
+
+{
+  "idCard": 4276380011110054,
+  "balance": 12345
+
+}
+###
+
+GET http://localhost:8000/balance?idAccount=10114444327
+Accept: application/json
+
+
+###
+
+GET http://localhost:8000/balance?idCard=4276380011110046
+Accept: application/json
+
+
+###
+POST /card
+HOST: localhost:8000
+Content-Type: application/json
+
+{
+  "idAccount": 10114444327
+}
+
+###
+GET http://localhost:8000/card?idAccount=10114444321
+Accept: application/json
