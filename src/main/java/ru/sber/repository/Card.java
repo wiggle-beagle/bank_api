@@ -1,9 +1,9 @@
-package repository;
+package ru.sber.repository;
 
 public class Card {
-    long idCard;
-    double balance;
-    long idAccount;
+    private long idCard;
+    private double balance;
+    private long idAccount;
 
     public Card(double balance, long idAccount) {
         this.balance = balance;
@@ -23,16 +23,8 @@ public class Card {
         return idCard;
     }
 
-    public void setIdCard(long idCard) {
-        this.idCard = idCard;
-    }
-
     public double getBalance() {
         return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public long getIdAccount() {

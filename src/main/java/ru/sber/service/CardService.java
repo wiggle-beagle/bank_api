@@ -1,21 +1,18 @@
-package service;
+package ru.sber.service;
 
-import repository.CRUD.AccountCRUD;
-import repository.CRUD.CardCRUD;
-import java.io.FileNotFoundException;
+import ru.sber.repository.CRUD.AccountCRUD;
+import ru.sber.repository.CRUD.AccountCRUDImpl;
+import ru.sber.repository.CRUD.CardCRUD;
+import ru.sber.repository.CRUD.CardCRUDImpl;
+
 import java.sql.SQLException;
 
 
 public class CardService {
-    CardCRUD cardCRUD = new CardCRUD();
-    AccountCRUD accountCRUD = new AccountCRUD();
+    private final CardCRUD cardCRUD = new CardCRUDImpl();
+    private final AccountCRUD accountCRUD = new AccountCRUDImpl();
 
-    public static void main(String[] args) throws FileNotFoundException, SQLException {
-        CardService cardService = new CardService();
-        System.out.println(cardService.createCardAndAccount(2));
-    }
-
-    public String createCardByAccount(long idAccount) throws FileNotFoundException, SQLException {
+    public String createCardByAccount(long idAccount) throws SQLException {
         return cardCRUD.createNewCardByAccount(idAccount);
     }
 
@@ -39,9 +36,9 @@ public class CardService {
         return cardCRUD.getListOfCardsByIdClient(idClient);
     }
 
-    public String createCardAndAccount(int idClient) throws SQLException, FileNotFoundException {
+    public String createCardAndAccount(int idClient) throws SQLException {
         Long idAccount = accountCRUD.createAccount(idClient);
-        return cardCRUD.createNewCardByAccount(idAccount) + ". Account created: "+idAccount;
+        return cardCRUD.createNewCardByAccount(idAccount) + ". Account created: " + idAccount;
     }
 
 }

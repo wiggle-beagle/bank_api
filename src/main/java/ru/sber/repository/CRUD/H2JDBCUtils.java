@@ -1,18 +1,18 @@
-package repository.CRUD;
+package ru.sber.repository.CRUD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class H2JDBCUtils {
-    private static String jdbcURL = "jdbc:h2:mem:bankSystem;DB_CLOSE_DELAY=-1";
-    private static String jdbcUsername = "admin";
-    private static String jdbcPassword = "12345";
 
     public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("org.h2.Driver");
+            String jdbcURL = "jdbc:h2:mem:bankSystem;DB_CLOSE_DELAY=-1";
+            String jdbcUsername = "admin";
+            String jdbcPassword = "12345";
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
         } catch (SQLException | ClassNotFoundException e) {
             // TODO Auto-generated catch block

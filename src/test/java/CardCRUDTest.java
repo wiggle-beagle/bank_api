@@ -1,23 +1,16 @@
 import org.junit.jupiter.api.*;
-import repository.CRUD.CardCRUD;
+import ru.sber.repository.CRUD.CardCRUDImpl;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 class CardCRUDTest {
-    CardCRUD cardCRUD = new CardCRUD();
-
-    @BeforeAll
-    public static void start() throws IOException, SQLException {
-        ServerTest.createDB();
-    }
+    CardCRUDImpl cardCRUD = new CardCRUDImpl();
 
 
     @Test
     void test_depositCurrency() throws SQLException {
         long idCard = 4276380011110004L;
         double money = 500;
-        String balance = cardCRUD.getCardBalance(idCard);
         String expected = "Card balance = " + Double.toString(1480);
         cardCRUD.depositCurrency(idCard, money);
         String result = cardCRUD.getCardBalance(idCard);

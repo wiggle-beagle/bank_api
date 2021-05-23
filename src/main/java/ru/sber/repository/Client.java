@@ -1,25 +1,15 @@
-package repository;
+package ru.sber.repository;
 
 public class Client {
-    int idClient;
-    String fio;
-
+    private int idClient;
+    private String fio;
 
     public Client(int idClient, String fio) {
         this.idClient = idClient;
         this.fio = fio;
-
-    }
-
-    public Client(int idClient) {
-        this.idClient = idClient;
     }
 
     public Client() {
-    }
-
-    public Client(String fio) {
-        this.fio = fio;
     }
 
     public int getIdClient() {
@@ -28,14 +18,6 @@ public class Client {
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
-    }
-
-    public String getFio() {
-        return fio;
-    }
-
-    public void setFio(String fio) {
-        this.fio = fio;
     }
 
     @Override

@@ -1,8 +1,8 @@
-package repository;
+package ru.sber.repository;
 
 public class Account {
-    long idAccount;
-    int idClient;
+    private long idAccount;
+    private int idClient;
 
     public Account(int idClient) {
         this.idClient = idClient;
