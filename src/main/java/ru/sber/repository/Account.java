@@ -1,7 +1,12 @@
 package ru.sber.repository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Account {
+    private double accountBalance;
     private long idAccount;
+
+    @JsonIgnore
     private int idClient;
 
     public Account(int idClient) {
@@ -30,6 +35,14 @@ public class Account {
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
     @Override

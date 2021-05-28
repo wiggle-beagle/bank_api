@@ -14,7 +14,7 @@ public class Server {
     public void start() throws SQLException, IOException {
         CreateDataBase.create();
         HttpServer server = HttpServer.create();
-        server.bind(new InetSocketAddress(8787), 0);
+        server.bind(new InetSocketAddress(8182), 0);
         server.createContext("/card/list", new CardListHandler());
         server.createContext("/card/create", new CardCreateHandler());
         server.createContext("/card/balance", new CardBalanceHandler());

@@ -1,7 +1,44 @@
+POST /card/create
+HOST: localhost:8181
+Accept: application/json
+
+{
+  "idAccount": 10114444321
+}
 
 ###
+
+
+GET http://localhost:8181/card/list?idAccount=10114444321
+Accept: application/json
+
+
+###
+POST /card/balance
+HOST: localhost:8181
+Accept: application/json
+
+{
+  "idCard": 4276380011110000,
+  "balance": 1000
+
+}
+
+
+###
+GET http://localhost:8181/card/balance?idCard=4276380011110000
+Accept: application/json
+
+
+
+
+
+
+###
+###
+###
 POST /card/create
-HOST: localhost:1000
+HOST: localhost:8080
 Accept: application/json
 
 {
@@ -11,7 +48,7 @@ Accept: application/json
 ###
 
 POST /card/create
-HOST: localhost:1000
+HOST: localhost:8080
 Accept: application/json
 
 {
@@ -20,17 +57,17 @@ Accept: application/json
 
 ###
 
-GET http://localhost:1000/card/list?idClient=1
+GET http://localhost:8080/card/list?idClient=1
 Accept: application/json
 
 ###
 
-GET http://localhost:1000/card/list?idAccount=10114444321
+GET http://localhost:8080/card/list?idAccount=10114444321
 Accept: application/json
 
 ###
 POST /card/balance
-HOST: localhost:1000
+HOST: localhost:8080
 Accept: application/json
 
 {
@@ -40,23 +77,8 @@ Accept: application/json
 }
 ###
 
-GET http://localhost:1000/balance?idAccount=10114444327
+GET http://localhost:8080/balance?idAccount=10114444327
 Accept: application/json
 
 
-###
 
-GET http://localhost:1000/balance?idCard=4276380011110046
-Accept: application/json
-
-
-###
-POST /card
-HOST: localhost:8000
-Content-Type: application/json
-
-{
-  "idAccount": 10114444327
-}
-
-###

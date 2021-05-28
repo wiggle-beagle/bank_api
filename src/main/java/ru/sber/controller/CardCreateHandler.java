@@ -30,7 +30,12 @@ public class CardCreateHandler implements HttpHandler {
             ErrorHandler.errorResponseBody(exchange);
         }
         assert response != null;
-        PostHandler.responseBody(exchange, response);
+        if (!response.equals("error")) {
+            PostHandler.responseBody(exchange, response);
+        }
+        else {
+            ErrorHandler.errorResponseBody(exchange);
+        }
 
     }
 }

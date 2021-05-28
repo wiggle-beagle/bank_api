@@ -11,6 +11,7 @@ public class H2JDBCUtils {
         try {
             Class.forName("org.h2.Driver");
             String jdbcURL = "jdbc:h2:mem:bankSystem;DB_CLOSE_DELAY=-1";
+//            String jdbcURL = "jdbc:h2:/Users/a19188027/Downloads/ddbb/data";
             String jdbcUsername = "admin";
             String jdbcPassword = "12345";
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);

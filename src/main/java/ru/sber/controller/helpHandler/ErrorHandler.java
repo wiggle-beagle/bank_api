@@ -8,7 +8,7 @@ import java.io.OutputStream;
 public class ErrorHandler {
     public static void errorResponseBody(HttpExchange exchange) throws IOException {
         OutputStream os = exchange.getResponseBody();
-        String error = "Данные некорректны";
+        String error = "Data is incorrect";
         exchange.sendResponseHeaders(404, error.getBytes().length);
         os.write(error.getBytes());
         os.flush();

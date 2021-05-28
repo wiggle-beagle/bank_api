@@ -3,7 +3,7 @@ package ru.sber.repository.CRUD;
 import java.sql.*;
 
 public class AccountCRUDImpl implements AccountCRUD {
-    private static final String INSERT_ACCOUNT_SQL = "INSERT INTO Account" +
+    private static final String INSERT_ACCOUNT_SQL = "INSERT INTO Account " +
             "  (idClient) VALUES " +
             " ( ?)";
 

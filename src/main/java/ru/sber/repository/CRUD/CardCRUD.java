@@ -15,7 +15,7 @@ public interface CardCRUD {
         return null;
     }
 
-    default String getAccountBalance(long accountID) throws SQLException {
+    default String getAccountBalance(long accountID) {
         return null;
     }
 

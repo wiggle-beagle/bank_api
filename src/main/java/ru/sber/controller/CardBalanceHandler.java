@@ -21,6 +21,8 @@ public class CardBalanceHandler implements HttpHandler {
 
         if (method.equals("GET")) {
             long id = GetHandler.getID(exchange);
+            Card card = new Card();
+            card.setIdCard(id);
             String balance = null;
             try {
                 balance = cardService.getCardBalance(id);
@@ -28,21 +30,31 @@ public class CardBalanceHandler implements HttpHandler {
                 ErrorHandler.errorResponseBody(exchange);
             }
             assert balance != null;
-            GetHandler.responseBody(exchange, balance);
-
+            if (!balance.equals("error")) {
+                card.setBalance(Double.parseDouble(balance));
+                ObjectMapper mapper = new ObjectMapper();
+                GetHandler.responseBody(exchange, mapper.writeValueAsString(card));
+            } else {
+                ErrorHandler.errorResponseBody(exchange);
+            }
         } else if (method.equals("POST")) {
             ObjectMapper mapper = new ObjectMapper();
-            Card card = null;
+            Card card;
+            String response = null;
             try {
                 card = mapper.readValue(exchange.getRequestBody(), Card.class);
+                response = cardService.addMoney(card.getIdCard(), card.getBalance());
             } catch (Exception e) {
                 ErrorHandler.errorResponseBody(exchange);
             }
-
-            assert card != null;
-            String response = cardService.addMoney(card.getIdCard(), card.getBalance());
-            PostHandler.responseBody(exchange, response);
+            assert response != null;
+            if (!response.equals("error")) {
+                PostHandler.responseBody(exchange, response);
+            } else {
+                ErrorHandler.errorResponseBody(exchange);
+            }
+        } else {
+            ErrorHandler.errorResponseBody(exchange);
         }
-
     }
 }

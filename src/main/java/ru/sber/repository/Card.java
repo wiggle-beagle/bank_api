@@ -1,8 +1,12 @@
 package ru.sber.repository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Card {
     private long idCard;
     private double balance;
+
+    @JsonIgnore
     private long idAccount;
 
     public Card(double balance, long idAccount) {
@@ -23,8 +27,16 @@ public class Card {
         return idCard;
     }
 
+    public void setIdCard(long idCard) {
+        this.idCard = idCard;
+    }
+
     public double getBalance() {
         return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public long getIdAccount() {

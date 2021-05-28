@@ -1,5 +1,6 @@
 package ru.sber.repository.CRUD;
 
+
 import java.sql.*;
 
 public class CardCRUDImpl implements CardCRUD {
@@ -26,7 +27,6 @@ public class CardCRUDImpl implements CardCRUD {
 
     private static final String UPDATE_CARD_BALANCE = "UPDATE Card set balance = balance + (?) WHERE idCard = (?)";
 
-
     @Override
     public String createNewCardByAccount(long idAccount) {
         long idCard = 0;
@@ -34,19 +34,19 @@ public class CardCRUDImpl implements CardCRUD {
              PreparedStatement preparedStatementCard = connection.prepareStatement(INSERT_CARD_SQL, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatementCard.setDouble(1, 0);
             preparedStatementCard.setLong(2, idAccount);
-            preparedStatementCard.executeUpdate();
-
-            ResultSet resultSet = preparedStatementCard.getGeneratedKeys();
-            if (resultSet.next()) {
-                idCard = resultSet.getLong(1);
+            int i = preparedStatementCard.executeUpdate();
+            if (i > 0) {
+                ResultSet resultSet = preparedStatementCard.getGeneratedKeys();
+                if (resultSet.next()) {
+                    idCard = resultSet.getLong(1);
+                }
+                return Long.toString(idCard);
             }
-            resultSet.close();
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
+            return "error";
         }
-
-
-        return "card created: " + idCard;
+        return null;
     }
 
     @Override
@@ -55,7 +55,6 @@ public class CardCRUDImpl implements CardCRUD {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatementCard = connection.prepareStatement(READ_CARDS_SQL_BY_ID_ACCOUNT)) {
             preparedStatementCard.setLong(1, idAccount);
-
             ResultSet resultSet = preparedStatementCard.executeQuery();
             while (resultSet.next()) {
                 sb.append(resultSet.getLong("idCard"));
@@ -84,35 +83,32 @@ public class CardCRUDImpl implements CardCRUD {
     }
 
     @Override
-    public String getAccountBalance(long accountID) throws SQLException {
-        double balance = 0L;
+    public String getAccountBalance(long accountID) {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CHECK_ACCOUNT_BALANCE)) {
             preparedStatement.setLong(1, accountID);
             ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                balance = rs.getDouble("sumBalance");
-                System.out.println(balance);
-            }
-            rs.close();
+            rs.next();
+            return Double.toString(rs.getDouble("sumBalance"));
+        } catch (Exception e) {
+            return "error";
         }
-        return "Account balance = " + balance;
     }
 
     @Override
     public String getCardBalance(long cardID) throws SQLException {
-        double balance = 0;
+        double balance;
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CHECK_CARD_BALANCE)) {
             preparedStatement.setLong(1, cardID);
             ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
+            if (rs.next()) {
                 balance = rs.getDouble("balance");
+                return Double.toString(balance);
+            } else {
+                return "error";
             }
         }
-        return "Card balance = " + balance;
     }
 
     @Override
@@ -121,11 +117,16 @@ public class CardCRUDImpl implements CardCRUD {
              PreparedStatement preparedStatementCard = connection.prepareStatement(UPDATE_CARD_BALANCE)) {
             preparedStatementCard.setDouble(1, money);
             preparedStatementCard.setLong(2, idCard);
-            preparedStatementCard.executeUpdate();
-
+            int i = preparedStatementCard.executeUpdate();
+            if (i > 0) {
+                return "money deposited";
+            } else {
+                return "error";
+            }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return "error";
         }
-        return "money deposited";
+
     }
 }

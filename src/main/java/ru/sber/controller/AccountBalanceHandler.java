@@ -1,11 +1,12 @@
 package ru.sber.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import ru.sber.controller.helpHandler.ErrorHandler;
 import ru.sber.controller.helpHandler.GetHandler;
-import ru.sber.repository.Card;
+import ru.sber.controller.helpHandler.PostHandler;
+import ru.sber.repository.Account;
 import ru.sber.service.CardService;
 
 import java.io.IOException;
@@ -17,6 +18,8 @@ public class AccountBalanceHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         long id = GetHandler.getID(exchange);
+        Account account = new Account();
+        account.setIdAccount(id);
         String balance = null;
         try {
             balance = cardService.getAccountBalance(id);
@@ -24,6 +27,12 @@ public class AccountBalanceHandler implements HttpHandler {
             ErrorHandler.errorResponseBody(exchange);
         }
         assert balance != null;
-        GetHandler.responseBody(exchange, balance);
+        if (!balance.equals("error")) {
+            account.setAccountBalance(Double.parseDouble(balance));
+            ObjectMapper mapper = new ObjectMapper();
+            PostHandler.responseBody(exchange, mapper.writeValueAsString(account));
+        } else {
+            ErrorHandler.errorResponseBody(exchange);
+        }
     }
 }
